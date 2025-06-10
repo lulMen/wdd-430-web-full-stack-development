@@ -5,3 +5,5 @@ demos
 cmp-databinding
 assignment-cmp-databinding
 directives
+services
+services-assignment
