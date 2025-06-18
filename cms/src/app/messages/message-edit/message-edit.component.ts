@@ -15,6 +15,7 @@ import { MessageService } from '../message.service';
 })
 export class MessageEditComponent implements OnInit {
   currentSender = 'Men Do';
+  senderId = '4';
 
   @ViewChild('subject') subjectRef: ElementRef;
   @ViewChild('msgText') msgTextRef: ElementRef;
@@ -32,7 +33,7 @@ export class MessageEditComponent implements OnInit {
       '1',
       subject,
       msgText,
-      this.currentSender
+      this.senderId,
     );
     this.messageService.addMessage(newMessage);
   }
