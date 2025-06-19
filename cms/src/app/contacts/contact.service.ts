@@ -19,25 +19,25 @@ export class ContactService {
     return this.contacts.slice();
   }
 
-  // getContact(id: string): Contact {
-  //   for (const contact of this.contacts) {
-  //     if (contact.id === id) {
-  //       return contact;
-  //     }
-  //   }
-  //   return null;
-  // }
-
-  getContact(id: number): Contact {
-    let i = 0;
+  getContact(id: string): Contact {
     for (const contact of this.contacts) {
-      if (id === i) {
+      if (contact.id === id) {
         return contact;
       }
-      i++;
     }
     return null;
   }
+
+  // getContact(id: number): Contact {
+  //   let i = 0;
+  //   for (const contact of this.contacts) {
+  //     if (id === i) {
+  //       return contact;
+  //     }
+  //     i++;
+  //   }
+  //   return null;
+  // }
 
   deleteContact(contact: Contact) {
     if (!contact) {

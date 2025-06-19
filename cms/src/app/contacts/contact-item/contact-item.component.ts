@@ -8,6 +8,6 @@ import { Contact } from '../contact.model';
   styleUrl: './contact-item.component.css'
 })
 export class ContactItemComponent {
-  @Input() contact: Contact;
-  @Input() index: number;
+  @Input() contact!: Contact;
+
 }

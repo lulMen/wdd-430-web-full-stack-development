@@ -12,7 +12,7 @@ import { WindRefService } from '../../wind-ref.service';
 })
 export class DocumentDetailComponent implements OnInit {
   document: Document;
-  id: number;
+  id: string;
   nativeWindow: any;
 
   constructor(
@@ -26,7 +26,7 @@ export class DocumentDetailComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = +params['id'];
+          this.id = params['id'];
           this.document = this.documentService.getDocument(this.id);
         }
       )

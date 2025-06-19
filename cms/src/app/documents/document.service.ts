@@ -19,25 +19,25 @@ export class DocumentService {
     return this.documents.slice();
   }
 
-  // getDocument(id: string): Document {
-  //   for (const document of this.documents) {
-  //     if (document.id === id) {
-  //       return document;
-  //     }
-  //   }
-  //   return null;
-  // }
-
-  getDocument(id: number): Document {
-    let i = 0;
+  getDocument(id: string): Document {
     for (const document of this.documents) {
-      if (id === i) {
+      if (document.id === id) {
         return document;
       }
-      i++;
     }
     return null;
   }
+
+  // getDocument(id: number): Document {
+  //   let i = 0;
+  //   for (const document of this.documents) {
+  //     if (id === i) {
+  //       return document;
+  //     }
+  //     i++;
+  //   }
+  //   return null;
+  // }
 
   deleteDocument(document: Document) {
     if (!document) {
