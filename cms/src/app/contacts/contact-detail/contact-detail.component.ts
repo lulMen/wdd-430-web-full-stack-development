@@ -10,8 +10,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrl: './contact-detail.component.css'
 })
 export class ContactDetailComponent implements OnInit {
+  contacts: Contact[] = [];
   contact: Contact;
   id: string;
+  groupContacts: Contact[] = [];
 
   constructor(
     private contactService: ContactService,
@@ -25,8 +27,10 @@ export class ContactDetailComponent implements OnInit {
         (params: Params) => {
           this.id = params['id'];
           this.contact = this.contactService.getContact(this.id);
-        }
-      )
+          this.groupContacts =
+            this.contact && this.contact.group
+              ? [...this.contact.group] : [];
+        });
   }
 
   onDelete() {

@@ -9,11 +9,14 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" cdkDropList id="contactsList" [cdkDropListData]="contacts"
+                [cdkDropListConnectedTo]="['groupList']">
                 <div class="row">
                     <div class="col-xs-12">
-                        <cms-contact-item *ngFor="let contactEl of contacts; let i = index" [contact]="contactEl"
-                            [index]="i"></cms-contact-item>
+                        <div class="draggable-contact-wrapper" *ngFor="let contactEl of contacts; let i = index" cdkDrag
+                            [cdkDragDisabled]="contactEl.id === selectedContactId">
+                            <cms-contact-item [contact]="contactEl" [index]="i"></cms-contact-item>
+                        </div>
                     </div>
                 </div>
             </div>

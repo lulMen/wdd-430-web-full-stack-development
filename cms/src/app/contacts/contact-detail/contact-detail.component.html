@@ -27,6 +27,8 @@
             <div class="panel-body">
                 <h5><strong>Email:</strong> {{contact.email}}</h5>
                 <h5><strong>Phone:</strong> {{contact.phone}}</h5>
+                <cms-contact-item *ngFor="let contact of groupContacts; let i = index" [contact]="contact"
+                    [index]="i"></cms-contact-item>
             </div>
         </div>
     </div>
