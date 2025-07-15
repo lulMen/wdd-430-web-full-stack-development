@@ -3,9 +3,25 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-xs-12">
-                        <h3 class="pull-left">Contacts</h3>
-                        <button class="btn btn-success pull-right" routerLink="new">New Contact</button>
+                    <h3 class="title pad-left-right">Contacts</h3>
+                </div>
+                <div class="row">
+                    <div class="input-group pull-left pad-left-right col-xs-7 form-group">
+                        <!-- Add the search box input field here -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form>
+                                    <input type="text" id="search" class="form-control"
+                                        placeholder="Enter a search value" name="search" #searchBox
+                                        (keyup)="search(searchBox.value)">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="glyphicon glyphicon-search input-group-addon " (click)="search(searchBox.value)">
+                        </div>
+                    </div>
+                    <div class="pull-right pad-left-right">
+                        <a class="btn btn-success" [routerLink]="['new']">New Contact</a>
                     </div>
                 </div>
             </div>
@@ -13,7 +29,8 @@
                 [cdkDropListConnectedTo]="['groupList']">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="draggable-contact-wrapper" *ngFor="let contactEl of contacts; let i = index" cdkDrag
+                        <div class="draggable-contact-wrapper"
+                            *ngFor="let contactEl of contacts | contactsFilter:searchBox.value; let i = index" cdkDrag
                             [cdkDragDisabled]="contactEl.id === selectedContactId">
                             <cms-contact-item [contact]="contactEl" [index]="i"></cms-contact-item>
                         </div>
