@@ -14,8 +14,7 @@ import { MessageService } from '../message.service';
   styleUrl: './message-edit.component.css'
 })
 export class MessageEditComponent implements OnInit {
-  currentSender = 'Men Do';
-  senderId = '4';
+  senderId = '6877ee51a193105605b7123c';
 
   @ViewChild('subject') subjectRef: ElementRef;
   @ViewChild('msgText') msgTextRef: ElementRef;
@@ -30,7 +29,7 @@ export class MessageEditComponent implements OnInit {
     const subject = this.subjectRef.nativeElement.value;
     const msgText = this.msgTextRef.nativeElement.value;
     const newMessage = new Message(
-      '1',
+      null,
       subject,
       msgText,
       this.senderId,

@@ -5,14 +5,13 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 const index = require('./server/routes/app');
 const messageRoutes = require('./server/routes/messages.js');
 const contactRoutes = require('./server/routes/contacts');
 const documentsRoutes = require('./server/routes/documents');
-
-// ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
 
 const app = express(); // create an instance of express
 
@@ -49,7 +48,15 @@ app.use('/messages', messageRoutes);
 app.use('/contacts', contactRoutes);
 app.use('/documents', documentsRoutes);
 
-// ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
+// Establish a connection to the mongo database
+mongoose
+    .connect('mongodb://127.0.0.1:27017/cms')
+    .then(() => {
+        console.log('Connected to database!');
+    })
+    .catch(error => {
+        console.error('Connection failed: ', error);
+    });
 
 // Tell express to map all other non-defined routes back to the index page
 // app.get('*', (req, res) => {

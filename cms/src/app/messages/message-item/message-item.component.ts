@@ -22,9 +22,12 @@ export class MessageItemComponent implements OnInit, OnDestroy {
 
     this.subscription = this.contactService.contactListChangedEvent
       .subscribe((contacts: Contact[]) => {
-        const contact = contacts.find(contact => contact.id === this.message.sender);
-        this.messageSender = contact.name;
-      })
+
+        let contact = contacts.find(contact => contact.id === this.message.sender);
+        if (!contact) { contact = contacts.find(contact => contact._id === this.message.sender) }
+
+        this.messageSender = contact ? contact.name : 'Unknown User';
+      });
   }
 
   ngOnDestroy(): void {
