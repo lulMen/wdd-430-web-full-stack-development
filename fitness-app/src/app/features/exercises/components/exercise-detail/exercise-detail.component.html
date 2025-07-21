@@ -1,0 +1,13 @@
+<h2>Edit Exercise</h2>
+<form [formGroup]="exerciseForm" (ngSubmit)="save()">
+    <div class="mb-3">
+        <label>Name</label>
+        <input class="form-control" formControlName="name">
+    </div>
+    <div class="mb-3">
+        <label>Muscle Group</label>
+        <input class="form-control" formControlName="muscleGroup">
+    </div>
+    <button class="btn btn-success">Save</button>
+    <button class="btn btn-danger ms-2" (click)="delete()">Delete</button>
+</form>

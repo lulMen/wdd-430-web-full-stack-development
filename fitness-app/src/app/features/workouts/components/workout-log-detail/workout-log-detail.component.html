@@ -1,0 +1,19 @@
+<h2>Workout on {{log.date | date:'fullDate'}}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let exercise of log.exercises">
+            <td>{{exercise.name}}</td>
+            <td>{{exercise.sets}}</td>
+            <td>{{exercise.reps}}</td>
+            <td>{{exercise.duration | duration}}</td>
+        </tr>
+    </tbody>
+</table>
