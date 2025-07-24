@@ -10,13 +10,32 @@ import { Exercise } from '../../../../shared/models/exercise.model';
 })
 export class ExerciseListComponent implements OnInit {
   exercises: Exercise[] = [];
+  filterTerm: string = '';
+  selectedToDelete?: Exercise;
+  showConfirm = false;
 
   constructor(private exerciseService: ExerciseService) { }
 
-  ngOnInit(): void {
+  load() {
     this.exerciseService.getAll().subscribe({
       next: (list) => this.exercises = list,
       error: (error) => console.error('Could not load exercises', error)
     });
+  }
+
+  ngOnInit(): void {
+    this.load();
+  }
+
+  onDelete(exercise: Exercise) {
+    const ok = window.confirm(`Delete "${exercise.name}"?`);
+    if (!ok) return;
+
+    this.exerciseService
+      .delete(exercise.id)
+      .subscribe({
+        next: () => this.load(),
+        error: error => console.error('Delete failed:', error)
+      });
   }
 }

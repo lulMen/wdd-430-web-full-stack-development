@@ -7,6 +7,7 @@ export interface WorkoutExercise {
 
 export interface Workout {
     id?: string;
+    _id?: string;
     date: string;
     exercises: WorkoutExercise[];
 }

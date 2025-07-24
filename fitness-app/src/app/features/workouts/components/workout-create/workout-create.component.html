@@ -1,32 +1,38 @@
-<h2>New Workout</h2>
-<form [formGroup]="workoutForm" (ngSubmit)="startWorkout()">
-    <div class="mb-3">
-        <label>Date</label>
-        <input type="date" class="form-control" formControlName="date">
-    </div>
+<ng-container *ngIf="workoutForm">
+    <h2>New Workout</h2>
+    <form [formGroup]="workoutForm" (ngSubmit)="startWorkout()">
+        <div class="mb-3">
+            <label>Date</label>
+            <input type="date" class="form-control" formControlName="date">
+        </div>
 
-    <div formArrayName="exercises">
-        <div class="card mb-2 p-3" *ngFor="let exerciseControl of exerciseControls.controls; let i = index"
-            [formGoupName]="i">
-            <div class="d-flex justify-content-between align-items-center">
-                <select class="form-select w-50" formControlName="exerciseId">
-                    <option *ngFor="let exercise of exercises" [value]="exercise.id">{{exercise.name}}</option>
-                </select>
-                <button class="btn btn-sm btn-outline-danger" (click)="removeExercise(i)">-</button>
-            </div>
-            <div class="row mt-2">
-                <div class="col">
-                    <label>Sets</label>
-                    <input type="number" class="form-control" formControlName="sets">
+        <div formArrayName="exercises">
+            <div class="card mb-2 p-3" *ngFor="let control of exercises.controls; let i = index" [formGroupName]="i">
+                <div class="d-flex justify-content-between align-items-center">
+                    <select class="form-select w-50" formControlName="exerciseId">
+                        <option value="">Select exercise...</option>
+                        <option *ngFor="let exercise of allExercises" [value]="exercise.id">{{exercise.name}}</option>
+                    </select>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeExercise(i)">-</button>
                 </div>
-                <div class="col">
-                    <label>Reps</label>
-                    <input type="number" class="form-control" formControlName="reps">
+                <div class="row mt-2">
+                    <div class="col">
+                        <label>Sets</label>
+                        <input type="number" class="form-control" formControlName="sets">
+                    </div>
+                    <div class="col">
+                        <label>Reps</label>
+                        <input type="number" class="form-control" formControlName="reps">
+                    </div>
+                    <div class="col">
+                        <label>Duration (sec)</label>
+                        <input type="number" class="form-control" formControlName="duration">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <button class="btn btn-outline-primary" (click)="addExercise()">+ Add Exercise</button>
-    <button class="btn btn-success ms-2" type="submit">Save Workout</button>
-</form>
+        <button type="button" class="btn btn-outline-primary" (click)="addExercise()">+ Add Exercise</button>
+        <button type="submit" class="btn btn-success" [disabled]="workoutForm.invalid">Start Workout</button>
+    </form>
+</ng-container>

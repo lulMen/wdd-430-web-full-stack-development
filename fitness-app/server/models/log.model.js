@@ -14,7 +14,7 @@ const logExerciseSchema = new Schema({
 });
 
 const logSchema = new Schema({
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     exercises: [logExerciseSchema]
 });
 

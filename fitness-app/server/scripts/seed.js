@@ -46,7 +46,7 @@ async function seed() {
     await Workout.insertMany(workoutsData);
 
     const logsData = workoutsData.map(workout => ({
-        date: workout.date,
+        date: workout.date.toISOString().slice(0, 10),
         exercises: workout.exercises.map(exercise => {
             const resultData = exercises.find(
                 entry => entry._id.toString() === exercise.exerciseId.toString()

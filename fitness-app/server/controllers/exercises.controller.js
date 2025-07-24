@@ -13,13 +13,14 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const exercise = await Exercise.findById(req.params.id).exec();
+        const exercise = await Exercise.findById(req.params.id.trim()).exec();
         if (!exercise) {
             return res.status(404)
                 .json({ message: 'Exercise not found' });
         }
         res.json(exercise);
     } catch (error) {
+        console.error(`Error fetching exercise ${req.params.id}: `, error);
         res.status(500)
             .json({ message: error.message });
     }
@@ -38,12 +39,13 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const updated = await Exercise.findByIdAndUpdate(req.params.id, req.body).exec();
+        const updated = await Exercise.findByIdAndUpdate(req.params.id.trim(), req.body, { new: true }).exec();
         if (!updated) {
             return res.status(404)
                 .json({ message: 'Exercise not found' })
         }
-        res.status(204);
+        res.status(204)
+            .json(updated);
     } catch (error) {
         res.status(400)
             .json({ message: error.message });
@@ -52,13 +54,14 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const deleted = await Exercise.findByIdAndDelete(req.params.id).exec();
+        const deleted = await Exercise.findByIdAndDelete(req.params.id.trim()).exec();
         if (!deleted) {
             return res.status(404)
                 .json({ message: 'Exercise not found' })
         }
-        res.status(204);
+        res.sendStatus(204);
     } catch (error) {
+        console.error(`Error deleting exercise ${req.params.id}: `, error);
         res.status(500)
             .json({ message: error.message });
     }

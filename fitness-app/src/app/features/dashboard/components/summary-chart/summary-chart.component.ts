@@ -10,23 +10,30 @@ import { DashboardService, VolumePoint } from '../../../../core/services/dashboa
   styleUrl: './summary-chart.component.css'
 })
 export class SummaryChartComponent implements AfterViewInit {
-  @ViewChild('chartCanvas') canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('chartCanvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   chart!: Chart;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngAfterViewInit(): void {
+    if (!this.canvas) {
+      console.error('Chart canvas not found!');
+      return;
+    }
+
     this.dashboardService.getWeeklyVolume().subscribe((data: VolumePoint[]) => {
       const labels = data.map(data => data.date);
       const values = data.map(data => data.totalReps);
 
-      this.chart = new Chart(this.canvas.nativeElement, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{ label: 'Reps', data: values }]
-        },
-        options: { responsive: true }
+      setTimeout(() => {
+        this.chart = new Chart(this.canvas.nativeElement, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{ label: 'Reps', data: values }]
+          },
+          options: { responsive: true }
+        });
       });
     });
   }

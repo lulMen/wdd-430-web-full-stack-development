@@ -13,7 +13,7 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        const workout = await Workout.findById(req.params.id).exec();
+        const workout = await Workout.findById(req.params.id.trim()).exec();
         if (!Workout) {
             return res.status(404)
                 .json({ message: 'Workout not found' });
@@ -39,12 +39,12 @@ exports.create = async (req, res) => {
 
 exports.remove = async (req, res) => {
     try {
-        const deleted = await Workout.findByIdAndDelete(req.parmas.id).exec();
+        const deleted = await Workout.findByIdAndDelete(req.parmas.id.trim()).exec();
         if (!deleted) {
             return res.status(404)
                 .json({ message: 'Workout not found' });
         }
-        res.status(204);
+        res.sendStatus(204);
     } catch (error) {
         console.error(`Error deleting workout ${req.params.id}: `, error);
         res.status(500)

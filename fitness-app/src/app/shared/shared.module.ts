@@ -4,11 +4,13 @@ import { RouterModule } from "@angular/router";
 
 import { AppHeaderComponent } from "./components/app-header/app-header/app-header.component";
 import { DurationPipe } from "./pipes/duration.pipe";
+import { ExerciseFilterPipe } from './pipes/exercise-filter.pipe';
 
 @NgModule({
     declarations: [
         AppHeaderComponent,
-        DurationPipe
+        DurationPipe,
+        ExerciseFilterPipe
     ],
     imports: [
         CommonModule,
@@ -16,8 +18,10 @@ import { DurationPipe } from "./pipes/duration.pipe";
     ],
     exports: [
         CommonModule,
+        RouterModule,
         AppHeaderComponent,
-        DurationPipe
+        DurationPipe,
+        ExerciseFilterPipe
     ]
 })
 export class SharedModule { }

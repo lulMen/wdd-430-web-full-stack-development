@@ -13,7 +13,7 @@ const workoutExerciseSchema = new Schema({
 });
 
 const workoutSchema = new Schema({
-    date: { type: Date, default: Date.now },
+    date: { type: String, required: true },
     exercises: [workoutExerciseSchema]
 });
 

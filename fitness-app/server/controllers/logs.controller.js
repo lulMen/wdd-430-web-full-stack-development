@@ -46,7 +46,7 @@ exports.remove = async (req, res) => {
             return res.status(404)
                 .json({ message: 'Log not found' });
         }
-        res.status(204);
+        res.sendStatus(204);
     } catch (error) {
         console.error(`Error deleting log ${req.params.id}: `, error)
         res.status(500)
